@@ -2,30 +2,15 @@ import React from 'react';
 import './TodoListItem.css';
 
 export default class TodoListItem extends React.Component {
-  state = {
-    done: false,
-    important: false,
-  };
-
-  // зачеркивает
-  onLabelClick = () => {
-    this.setState(({ done }) => {
-      return { done: !done };
-    });
-  };
-
-  // выделяет
-  onMarkImportant = () => {
-    this.setState((state) => {
-      return {
-        important: !state.important,
-      };
-    });
-  };
-
   render() {
-    const { label, onDeleted } = this.props;
-    const { done, important } = this.state;
+    const {
+      label,
+      onDeleted,
+      onToggleImportant,
+      onToggleDone,
+      done,
+      important,
+    } = this.props;
 
     let className = 'todo-list-item';
     // зачеркивает строку
@@ -39,14 +24,14 @@ export default class TodoListItem extends React.Component {
 
     return (
       <span className={className}>
-        <span className='todo-list-item-label' onClick={this.onLabelClick}>
+        <span className='todo-list-item-label' onClick={onToggleDone}>
           {label}
         </span>
         <div>
           <button
             type='button'
             className='btn btn-outline-success btn-sm float-right'
-            onClick={this.onMarkImportant}
+            onClick={onToggleImportant}
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
